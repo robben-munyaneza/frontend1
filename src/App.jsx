@@ -5,6 +5,8 @@ import Welcome from './components/Welcome';
 import Register from './components/Register';
 import LoginForm from './components/LoginForm';
 import SetRole from './components/setRole';
+import DetailedFormSeeker from './components/DetailedFormSeeker';
+import DetailedFormFounder from './components/DetailedFormFounder';
 
 
 function App() {
@@ -15,7 +17,9 @@ function App() {
         <Route path="/" element={<Welcome />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm/>} />
-          <Route path="/setrole" element={<SetRole/>} />
+        <Route path="/setrole" element={<SetRole/>} />
+        <Route path="/formseeker" element={<DetailedFormSeeker/>} />
+        <Route path='/formfounder' element={<DetailedFormFounder/>} />
         </Routes>
       </div>
     </Router>
