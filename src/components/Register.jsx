@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
     name: "",
-    identifier: "", // This will hold either an email or a phone number
+    identifier: "", // Holds either an email or a phone number
     location: "",
     password: "",
   });
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const API_URL = process.env.REACT_APP_API_URL; // Get API URL from environment variables
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.identifier) {
@@ -18,7 +24,22 @@ const Register = () => {
       return;
     }
 
-    console.log("Form submitted:", formData);
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await axios.post(`${API_URL}/register`, formData);
+
+      console.log("Response:", response.data);
+      alert("Registration successful!");
+      
+      navigate('/login'); // Redirect to login after success
+    } catch (err) {
+      console.error("Error:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -29,7 +50,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-amber-50 ">
+    <div className="min-h-screen flex items-center justify-center bg-amber-50">
       {/* Registration Form */}
       <div className="w-full max-w-md shadow-xl border-0 bg-white rounded-lg p-6">
         <div className="space-y-1">
@@ -86,11 +107,14 @@ const Register = () => {
               />
             </div>
 
-            <button onClick={() => navigate('/login')}
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+
+            <button
               type="submit"
               className="w-full bg-amber-800 text-white py-3 px-4 rounded-lg hover:bg-amber-900 transition-colors duration-200 font-medium shadow-lg"
+              disabled={loading}
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </form>
         </div>
