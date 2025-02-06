@@ -5,9 +5,6 @@ import Welcome from './components/Welcome';
 import Register from './components/Register';
 import LoginForm from './components/LoginForm';
 import SetRole from './components/setRole';
-import DetailedFormSeeker from './components/DetailedFormSeeker';
-import DetailedFormFounder from './components/DetailedFormFounder';
-import FindersDash from './components/Findersdash.jsx';
 
 
 function App() {
@@ -19,9 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginForm/>} />
         <Route path="/setrole" element={<SetRole/>} />
-        <Route path="/formseeker" element={<DetailedFormSeeker/>} />
-        <Route path='/formfounder' element={<DetailedFormFounder/>} />
-        <Route path='/finder-dash' element={<FindersDash/>} />
+      
         </Routes>
       </div>
     </Router>
