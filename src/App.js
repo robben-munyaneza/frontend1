@@ -1,20 +1,19 @@
-import logo from './logo.svg';
-import './index.js';
-import Home from './components/Home.js';
-import ImportButton from './components/ImportButton.js';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Welcome from './components/Welcome';
+import Register from './components/Register';
+import LoginForm from './components/LoginForm';
 
-
-    function App() {
-      return (
-        <div>
-          <Home/>
-          <ImportButton/>
-        </div>
-      );
-    }
-    
-  
-    
-
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<LoginForm/>} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
