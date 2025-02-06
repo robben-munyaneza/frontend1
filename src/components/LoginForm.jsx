@@ -86,7 +86,7 @@ const LoginForm = () => {
             </button>
 
             <p className="text-center text-sm text-amber-900">
-              Don't have an account? <a href="#" className="text-amber-800 hover:underline">Register here</a>
+              Don't have an account? <a href="./register" className="text-amber-800 hover:underline">Register here</a>
             </p>
           </form>
         </div>

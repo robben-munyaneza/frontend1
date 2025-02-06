@@ -24,11 +24,7 @@ const founder=()=>{
 
 
 
-<<<<<<< HEAD
             <span className="font-semibold text-lg">Finder</span>
-=======
-            <Link to="/formfounder"><span className="font-semibold text-lg">Founder</span></Link>
->>>>>>> bc5cd5702f2477be9da4e929e34487c2d38af7e5
           </button>
 
           <button onClick={seeker} className="flex items-center px-8 py-4 bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#A0522D] focus:ring-offset-2 hover:shadow-xl">
@@ -53,7 +49,7 @@ const founder=()=>{
 </div>
 
         </div>
-      
+      9
 
     </div>
   );

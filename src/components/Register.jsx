@@ -65,7 +65,7 @@ const Register = () => {
                 name="names"
                 required
                 className="w-full rounded-lg border border-amber-200 p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
-                value={formData.name}
+                value={formData.names}
                 onChange={handleChange}
               />
             </div>
@@ -90,7 +90,7 @@ const Register = () => {
                 name="homeLocation"
                 required
                 className="w-full rounded-lg border border-amber-200 p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
-                value={formData.location}
+                value={formData.homeLocation}
                 onChange={handleChange}
               />
             </div>
@@ -114,8 +114,19 @@ const Register = () => {
               className="w-full bg-amber-800 text-white py-3 px-4 rounded-lg hover:bg-amber-900 transition-colors duration-200 font-medium shadow-lg"
               disabled={loading}
             >
-              {loading ? "Submitting..." : "Submit"}
+              {loading ? "Submitting..." : "Register"}
             </button>
+
+            {/* Login Button */}
+            <p className="text-center text-sm text-gray-600 mt-3">
+              Already have an account?{" "}
+              <button
+                onClick={() => navigate('/login')}
+                className="text-amber-700 font-medium hover:underline"
+              >
+                Login
+              </button>
+            </p>
           </form>
         </div>
       </div>
