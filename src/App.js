@@ -1,19 +1,21 @@
-import logo from './logo.svg';
+import React from 'react';      
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.js';
-import Home from './components/Home.js';
-import ImportButton from './components/ImportButton.js';
+import SetRole from './components/setRole';
 
 
-    function App() {
-      return (
-        <div>
-          <Home/>
-          <ImportButton/>
-        </div>
-      );
-    }
-    
-  
+function App() {
+  return (
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<SetRole/>} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
     
 
 
