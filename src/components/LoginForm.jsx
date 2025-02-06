@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+ const navigate = useNavigate();
   const [formData, setFormData] = useState({
     identifier: '',
     password: ''
@@ -51,7 +53,7 @@ const LoginForm = () => {
               />
             </div>
 
-            <button
+            <button  onClick={() => navigate('/setrole')}
               type="submit"
               className="w-full bg-amber-800 text-white py-3 px-4 rounded-lg hover:bg-amber-900 transition-colors duration-200 font-medium shadow-lg"
             >

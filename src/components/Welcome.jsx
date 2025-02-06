@@ -18,12 +18,12 @@ const Welcome = () => {
         
         <p className="mb-4 font-semibold">Examples of requirements:</p>
         <ul className="text-left mx-auto mb-6 inline-block">
-          <li>✅ Identification Cards (ID)</li>
-          <li>✅ Passports</li>
-          <li>✅ Driver's Licenses</li>
-          <li>✅ Certificates (Birth, Marriage, Education, etc.)</li>
-          <li>✅ Business Permits</li>
-          <li>✅ Other official documents</li>
+          <li>. Identification Cards (ID)</li>
+          <li>. Passports</li>
+          <li>. Driver's Licenses</li>
+          <li>. Certificates (Birth, Marriage, Education, etc.)</li>
+          <li>. Business Permits</li>
+          <li>. Other official documents</li>
         </ul>
 
         <button 
