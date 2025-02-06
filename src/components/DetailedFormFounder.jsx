@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 // import { FaImage, FaTimes } from "react-icons/fa";
 
 const DetailedFormFounder = () => {
+
+    const navigate = useNavigate();
+    const finder=()=>{
+      navigate('/finderdash');
+    }
+    
+
+  
   const [formData, setFormData] = useState({
     fullName: '',
     selectItem: '',
@@ -51,7 +61,7 @@ const DetailedFormFounder = () => {
     <div className="flex min-h-screen bg-gray-100">
       <div className="w-2/3 p-8 bg-white shadow-lg">
         <h1 className="text-3xl font-bold mb-1  text-gray-800">SHAKA System</h1>
-        <h2 className='mb-2 font-light text-2xl text-amber-700'>Founder info:</h2>
+        <h2 className='mb-2 font-light text-2xl text-amber-700'>Finder info:</h2>
         <form onSubmit={handleSubmit} className="space-y-1">
           <div className="grid grid-cols-1 gap-1">
             <label htmlFor="" className='block text-sm font-medium text-gray-700'>FullNames on the item:</label>
@@ -168,7 +178,7 @@ const DetailedFormFounder = () => {
               required
             />
           </div>
-          <button 
+          <button onClick={finder}
             type="submit" 
             className="w-full bg-amber-700 text-white py-3 rounded-lg hover:bg-amber-600 transition duration-300"
           >

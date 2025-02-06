@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
+// import { FaImage, FaTimes } from "react-icons/fa";
+
+
 const DetailedFormSeeker = () => {
+  
+  const navigate = useNavigate();
+  const seeker=()=>{
+    navigate('/seekerdash');
+  }
+
   const [formData, setFormData] = useState({
     fullNames: '',
     selectItem: '',
@@ -81,7 +93,7 @@ const DetailedFormSeeker = () => {
               className="w-full px-4 py-2 mb-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
               required
             />
-          <button 
+          <button onClick={seeker}
             type="submit" 
             className="w-full bg-amber-700 text-white py-3 rounded-lg hover:bg-amber-700 transition duration-300"
           >

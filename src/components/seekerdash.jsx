@@ -1,33 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const FindersDash = () => {
+const SeekerDash = () => {
   const [showModal, setShowModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+
+  const [foundItems, setFoundItems] = useState([
+    { id: 1, docName: 'Passport', docType: 'Travel Document', docCode: 'P123456', location: 'Kigali-Gahanga' },
+    { id: 2, docName: 'Driver', docType: 'Identification', docCode: 'DL789012', location: 'Kigali -Gikondo' },
+    { id: 3, docName: 'ID-card  ', docType: 'Identification', docCode: 'DL789012', location: 'Kigali -Gasabo' },
+  ]);
 
   const [notifications, setNotifications] = useState([
     {
       id: 1,
-      itemName: 'Passport',
-      seekerName: 'John Doe',
-      notice: 'Please submit this document to the nearest government establishment to claim your reward.',
-    },
-    {
-      id: 2,
-      itemName: 'Driver’s License',
-      seekerName: 'Jane Smith',
-      notice: 'Please submit this document to the nearest government establishment to claim your reward.',
+      itemName: 'National ID',
+      status: 'Claim Approved',
+      notice: 'Your claim has been approved. Visit the specified location to collect your document.',
     },
   ]);
-
-  const [postedDocuments, setPostedDocuments] = useState([
-    { id: 1, docName: 'Passport', docType: 'Travel Document', docCode: 'P123456' },
-    { id: 2, docName: 'Driver’s License', docType: 'Identification', docCode: 'DL789012' },
-  ]);
-
-  const handleDeleteNotification = (id) => {
-    setNotifications(notifications.filter((notification) => notification.id !== id));
-  };
 
   const handleRoleChange = () => {
     setShowModal(true);
@@ -35,44 +27,68 @@ const FindersDash = () => {
 
   const confirmRoleChange = () => {
     setShowModal(false);
-    navigate('/seekerdash'); // Redirect to seeker dashboard (placeholder route)
+    navigate('/finderdash');
   };
 
   const cancelRoleChange = () => {
     setShowModal(false);
   };
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+    // Implement search logic here
+  };
+
+  const handleClaim = (itemId) => {
+    // Implement claim logic here
+    alert(`Claiming item with ID: ${itemId}`);
+  };
+
+  const filteredItems = foundItems.filter(item =>
+    item.docName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.docType.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="flex h-screen bg-gradient-to-r from-[#D2B48C] to-[#F4A460] p-4">
-      {/* Left Div - Document Status */}
+      {/* Left Div - Search and Results */}
       <div className="w-3/4 bg-[#FAF0E6] p-6 rounded-lg shadow-md mr-4">
-        <h2 className="text-2xl font-bold mb-6 text-[#654321]">Welcome, Finder!</h2>
+        <h2 className="text-2xl font-bold mb-6 text-[#654321]">Welcome, Seeker!</h2>
         <button
           onClick={handleRoleChange}
           className="bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white px-4 py-2 rounded hover:from-[#A0522D] hover:to-[#8B4513] transition-all duration-300 mb-6"
         >
-          Switch to Seeker Role
+          Switch to Finder Role
         </button>
 
-        <h3 className="text-xl font-bold mb-4 text-[#654321]">Posted Documents</h3>
+        <div className="mb-6">
+          <input
+            type="text"
+            placeholder="Search for lost documents..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="w-full p-3 rounded-lg border border-[#D2B48C] focus:outline-none focus:ring-2 focus:ring-[#8B4513]"
+          />
+        </div>
+
         <div className="space-y-4">
-          {postedDocuments.map((doc) => (
+          {filteredItems.map((item) => (
             <div
-              key={doc.id}
+              key={item.id}
               className="bg-white p-4 rounded-lg shadow-sm border border-[#D2B48C] transition-all duration-300 hover:shadow-md"
             >
-              <h3 className="text-xl font-semibold text-[#654321]">{doc.docName}</h3>
-              <p className="text-sm text-[#8B4513]">Type: {doc.docType}</p>
-              <p className="text-sm text-[#8B4513]">Code: {doc.docCode}</p>
+              <h3 className="text-xl font-semibold text-[#654321]">{item.docName}</h3>
+              <p className="text-sm text-[#8B4513]">Type: {item.docType}</p>
+              <p className="text-sm text-[#8B4513]">Location: {item.location}</p>
+              <button
+                onClick={() => handleClaim(item.id)}
+                className="bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white px-4 py-2 rounded mt-2 hover:from-[#A0522D] hover:to-[#8B4513] transition-all duration-300"
+              >
+                Claim Document
+              </button>
             </div>
           ))}
         </div>
-        <button
-          onClick={() => alert('Redirect to declare new document page')}
-          className="bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white px-4 py-2 rounded mt-6 hover:from-[#A0522D] hover:to-[#8B4513] transition-all duration-300"
-        >
-          Declare New Document
-        </button>
       </div>
 
       {/* Right Div - Notifications */}
@@ -85,14 +101,8 @@ const FindersDash = () => {
               className="bg-[#D2B48C] p-4 rounded-lg text-[#654321] transition-all duration-300 hover:shadow-md"
             >
               <h4 className="font-semibold">{notification.itemName}</h4>
-              <p className="text-sm">Claimed by: {notification.seekerName}</p>
+              <p className="text-sm">Status: {notification.status}</p>
               <p className="text-xs mt-2 italic">{notification.notice}</p>
-              <button
-                onClick={() => handleDeleteNotification(notification.id)}
-                className="bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white px-3 py-1 rounded mt-2 hover:from-[#A0522D] hover:to-[#8B4513] transition-all duration-300"
-              >
-                Delete
-              </button>
             </div>
           ))}
         </div>
@@ -103,7 +113,7 @@ const FindersDash = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-[#FAF0E6] p-6 rounded-lg shadow-lg transition-all duration-300">
             <h3 className="text-xl font-bold mb-4 text-[#654321]">Confirm Role Change</h3>
-            <p className="mb-6 text-[#654321]">Are you sure you want to switch to the Seeker role?</p>
+            <p className="mb-6 text-[#654321]">Are you sure you want to switch to the Finder role?</p>
             <div className="flex space-x-4">
               <button
                 onClick={confirmRoleChange}
@@ -125,4 +135,4 @@ const FindersDash = () => {
   );
 };
 
-export default FindersDash;
+export default SeekerDash;
