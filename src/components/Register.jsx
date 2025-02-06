@@ -5,9 +5,9 @@ import axios from "axios";
 const Register = () => {
   const navigate = useNavigate(); 
   const [formData, setFormData] = useState({
-    name: "",
+    names: "",
     identifier: "", // Holds either an email or a phone number
-    location: "",
+    homeLocation: "",
     password: "",
   });
 
@@ -28,7 +28,7 @@ const Register = () => {
       setLoading(true);
       setError("");
 
-      const response = await axios.post(`${API_URL}/register`, formData);
+      const response = await axios.post(`http://localhost:5100/auth/register`, formData);
 
       console.log("Response:", response.data);
       alert("Registration successful!");
@@ -62,7 +62,7 @@ const Register = () => {
               <label className="block text-sm font-medium mb-1 text-amber-900">Name</label>
               <input
                 type="text"
-                name="name"
+                name="names"
                 required
                 className="w-full rounded-lg border border-amber-200 p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
                 value={formData.name}
@@ -87,7 +87,7 @@ const Register = () => {
               <label className="block text-sm font-medium mb-1 text-amber-900">Location</label>
               <input
                 type="text"
-                name="location"
+                name="homeLocation"
                 required
                 className="w-full rounded-lg border border-amber-200 p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
                 value={formData.location}
