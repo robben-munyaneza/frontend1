@@ -54,7 +54,7 @@ const Register = () => {
       {/* Registration Form */}
       <div className="w-full max-w-md shadow-xl border-0 bg-white rounded-lg p-6">
         <div className="space-y-1">
-          <h2 className="text-2xl text-center text-amber-900 font-bold">Register</h2>
+          <h2 className="text-2xl text-center text-amber-900 font-bold">Shaka Tracking System</h2>
         </div>
         <div className="mt-6">
           <form onSubmit={handleSubmit} className="space-y-4">
