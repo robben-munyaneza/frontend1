@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SetRole = () => {
   const navigate = useNavigate();
@@ -24,14 +24,18 @@ const founder=()=>{
 
 
 
+<<<<<<< HEAD
             <span className="font-semibold text-lg">Finder</span>
+=======
+            <Link to="/formfounder"><span className="font-semibold text-lg">Founder</span></Link>
+>>>>>>> bc5cd5702f2477be9da4e929e34487c2d38af7e5
           </button>
 
           <button onClick={seeker} className="flex items-center px-8 py-4 bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#A0522D] focus:ring-offset-2 hover:shadow-xl">
           <img width="50" height="50" src="https://img.icons8.com/fluency-systems-filled/50/FFFFFF/user-male-circle.png" alt="user-male-circle"/>
 
 
-            <span className="font-semibold text-lg">Seeker</span>
+            <Link to="/formseeker"><span className="font-semibold text-lg">Seeker</span></Link>
           </button>
         </div>
       </div>

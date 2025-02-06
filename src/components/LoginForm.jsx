@@ -1,16 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginForm = () => {
  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    identifier: '',
+    email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login submitted:', formData);
+
+    if (!formData.email) {
+      alert("Please enter an email.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await axios.post(`http://localhost:5100/auth/login`, formData);
+
+      console.log("Response:", response.data);
+      alert("login successful!");
+      
+      navigate('/setrole'); // Redirect to login after success
+    } catch (err) {
+      console.error("Error:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -18,6 +42,7 @@ const LoginForm = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+
   };
 
   return (
@@ -32,7 +57,7 @@ const LoginForm = () => {
               <label className="block text-sm font-medium mb-1 text-amber-900">Phone or Email</label>
               <input
                 type="text"
-                name="identifier"
+                name="email"
                 required
                 placeholder="Enter phone number or email"
                 className="w-full rounded-lg border border-amber-200 p-3 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
